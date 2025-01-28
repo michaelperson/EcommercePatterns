@@ -18,6 +18,7 @@ namespace EcommercePatterns.Payment
             {
                 PaymentType.CreditCard => new CreditCardPayment(),
                 PaymentType.PayPal => new PayPalPayment(),
+                PaymentType.BankTransfer=> new BankTransfertPayment(),
                 _ => throw new ArgumentException("Type de paiement non supporté")
             };
         }

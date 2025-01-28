@@ -58,7 +58,7 @@ namespace EcommercePatterns.core
         {
             foreach (var observer in observers)
             {
-                observer.Update(this);
+              observer.Update(this);
             }
         }
 

@@ -7,17 +7,20 @@ using EcommercePatterns.Shipping.Specialized;
 using EcommercePatterns.Services;
 using EcommercePatterns.core.Exceptions;
 using EcommercePatterns.core.Models;
+using EcommercePatterns.Payment.Specialized;
+using EcommercePatterns.Services.Exceptions;
+using System.Reflection.Metadata.Ecma335;
 
 // Initialisation du singleton de configuration
 try
 {
     // Initialisation de la configuration
-    var config = Configuration.Instance;
+    Configuration config = Configuration.Instance;
     config.LoadConfiguration();
 
     // Récupération des paramètres spécifiques si nécessaire
-    var emailSettings = config.GetSection<EmailSettings>("EmailSettings");
-    var appSettings = config.GetSection<ApplicationSettings>("ApplicationSettings");
+    EmailSettings emailSettings = config.GetSection<EmailSettings>("EmailSettings");
+    ApplicationSettings appSettings = config.GetSection<ApplicationSettings>("ApplicationSettings");
 
     // Création du client
     var client = new Client
@@ -36,7 +39,8 @@ try
 
     // Création du moyen de paiement via la Factory
     var paymentFactory = new PaymentMethodFactory();
-    var payment = paymentFactory.CreatePaymentMethod(PaymentType.CreditCard);
+   
+    var payment = paymentFactory.CreatePaymentMethod(PaymentType.BankTransfer); 
 
     // Calcul des frais de port avec la stratégie appropriée
     var shippingStrategy = new LocalShippingStrategy();
@@ -62,6 +66,10 @@ try
     {
         Console.WriteLine($"Erreur lors du traitement de la commande : {ex.Message}");
     }
+}
+catch (EmailServiceException ex)
+{
+    Console.WriteLine($"Erreur de dans le service d'envoie d'email : {ex.Message}"); 
 }
 catch (ConfigurationException ex)
 {
