@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Accès refusé";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="access-denied-container">
+                <div class="access-denied-icon mb-4">
+                    <i class="fas fa-lock fa-5x text-danger"></i>
+                </div>
+
+                <h1 class="display-4 text-danger mb-3">Accès non autorisé</h1>
+
+                <p class="lead text-muted mb-4">
+                    Vous n'avez pas les autorisations nécessaires pour accéder à cette ressource.
+                </p>
+
+                <div class="alert alert-warning" role="alert">
+                    <strong>Que faire maintenant ?</strong>
+                    <ul class="list-unstyled mt-2">
+                        <li>• Vérifiez vos droits d'accès</li>
+                        <li>• Contactez votre administrateur</li>
+                        <li>• Assurez-vous d'être connecté avec le bon compte</li>
+                    </ul>
+                </div>
+
+                <div class="actions mt-4">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary me-2">
+                        <i class="fas fa-home me-1"></i> Retour à l'accueil
+                    </a>
+                    <a asp-controller="Account" asp-action="SignOut" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Optional: Log the access denied event
+        console.warn('Accès refusé à une ressource protégée.');
+    </script>
+}
+
+<style>
+    .access-denied-container {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .access-denied-icon {
+        opacity: 0.7;
+        animation: pulse 2s infinite;
+    }
+
+    
+</style>

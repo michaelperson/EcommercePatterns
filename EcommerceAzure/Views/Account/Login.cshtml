@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Connexion";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Connexion</h2>
+
+            @if (User.Identity?.IsAuthenticated != true)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Authentification Azure Entra</h5>
+                        <p class="card-text">Connectez-vous avec votre compte Azure</p>
+                        <a asp-controller="Account" asp-action="SignIn" class="btn btn-primary">
+                            Se connecter
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    Vous êtes déjà connecté.
+                    <a asp-controller="Account" asp-action="Profile">Voir mon profil</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

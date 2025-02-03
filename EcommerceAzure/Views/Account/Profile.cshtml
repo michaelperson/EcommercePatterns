@@ -1,0 +1,31 @@
+﻿@model List<UserClaimViewModel>
+
+<div class="container">
+    <h2>Profil Utilisateur</h2>
+
+    <div class="card">
+        <div class="card-header">
+            Informations de connexion
+        </div>
+        <div class="card-body">
+            <h5>Revendications (Claims)</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var claim in Model)
+                    {
+                        <tr>
+                            <td>@claim.Type</td>
+                            <td>@claim.Value</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

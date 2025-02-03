@@ -2,6 +2,7 @@
 using EcommercePatterns.Notification.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
 using System.Text;
@@ -12,6 +13,7 @@ namespace EcommercePatterns.core
     // Pattern Observer - Sujet
     public class Order : ISubject
     {
+        public int Id { get; set; }
         private List<IObserver> observers = new List<IObserver>();
         private List<Product> products = new List<Product>();
         private OrderStatus status;
@@ -24,12 +26,23 @@ namespace EcommercePatterns.core
         public Client Client { get; set; }
         public string OrderNumber { get; private set; }
 
-        public Order(Client client)
+
+        // Constructeur par défaut requis par EF Core
+        public Order()
+        {
+            // Initialisez les collections si nécessaire
+            products = new List<Product>();
+            observers = new List<IObserver>();
+            status = OrderStatus.Created;
+        }
+
+        // Conservez votre constructeur existant
+        public Order(Client client) : this()
         {
             Client = client ?? throw new ArgumentNullException(nameof(client));
             OrderNumber = GenerateOrderNumber();
-            status = OrderStatus.Created;
         }
+
 
         private string GenerateOrderNumber()
         {
